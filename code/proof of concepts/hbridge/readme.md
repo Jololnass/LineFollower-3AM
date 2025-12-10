@@ -1,47 +1,9 @@
-# H-Bridge proof of concept
+Welkom in de readme van het H-brug gedeelte van de linefollower.
 
-minimale hard- & software + stappenplan dat aantoont dat 2 motoren onafhankelijk van elkaar kunnen draaien, en (traploos) regelbaar zijn in snelheid en draairichting.
+De H-brug gebruikt een DRV8833 microchip. Deze heeft op het breakoutbord 4 ingangen, 4 uitgangen, VCC, GND, EEP & ULT.
 
-const int IN1 = 5;   // Motor A pin 1
-const int IN2 = 6;   // Motor A pin 2
-const int IN3 = 9;   // Motor B pin 1
-const int IN4 = 10;  // Motor B pin 2
+De ingangen en uitgangen spreeken opzich, zeer belangrijk bij de ingangen is dat de pwm's op de zelfde clock snelheid zitten. PWM 3, 5, 6 & 11 hebben een 8bit clocksnelheid. PWM 9 & 10 hebben een 16bit clocksnelheid. ALs 2 soorten clocksnelheden worden gebruikt zullen de motoren een verschillende snelheid hebben.
 
-void setup() {
-  pinMode(IN1, OUTPUT);
-  pinMode(IN2, OUTPUT);
-  pinMode(IN3, OUTPUT);
-  pinMode(IN4, OUTPUT);
-  Serial.begin(9600);
-  Serial.println("Twee motoren snelheidsverloop test start");
-}
+De EEP pin wordt aan de VCC (5V) van de arduino gekoppeld, dit moet zeker verbonden worden anders zal de H-brug niet werken. Als de EEP geen voeding krijgt zal de H-brug in sleep modus staan waardoor de OUT's niet zullen schakelen.
 
-void loop() {
-  // snelheid van -255 (achteruit) naar 255 (vooruit)
-  for (int snelheid = -255; snelheid <= 255; snelheid++) {
-    stelMotorSnelheidIn(IN1, IN2, snelheid);  // Motor A
-    stelMotorSnelheidIn(IN3, IN4, snelheid);  // Motor B
-    Serial.println(snelheid);
-    delay(10); // bepaalt hoe snel de verandering verloopt
-  }
-
-  // eventueel even stoppen
-  stelMotorSnelheidIn(IN1, IN2, 0);
-  stelMotorSnelheidIn(IN3, IN4, 0);
-  delay(1000);
-}
-
-// ---------- Functie om motorrichting en PWM in te stellen ----------
-void stelMotorSnelheidIn(int pin1, int pin2, int snelheid) {
-  if (snelheid > 0) {
-    analogWrite(pin1, snelheid);
-    analogWrite(pin2, 0);
-  } else if (snelheid < 0) {
-    analogWrite(pin1, 0);
-    analogWrite(pin2, -snelheid); // negatief omzetten naar positief
-  } else {
-    // motor uit
-    analogWrite(pin1, 0);
-    analogWrite(pin2, 0);
-  }
-}
+De Ult pin wordt met een pull-up weerstand geschakeld, deze dient als fout detectie. Als de H-brug normaal werkt zal deze een hoog signaal hebben waardoor de arduino een laag signaal leest. Als er een interne fout in de H-brug is zal de uitgang laag zijn waardoor de arduino een hoog signaal zal lezen. Dit zullen we a.d.h.v. een HC-05 door sturen naar een gsm.
