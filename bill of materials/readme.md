@@ -17,5 +17,5 @@
 | 12|    | klemschroefblok 2 pins          | recup          |              |  3    |         |
 | 14|   Frame | Houder van alle componenten | 3D print     | /              | 1     | /         |
 | 15|    Spoiler| stabiliteitsaccecoire  | 3D print     | /            | 1     | /        |
-|  1|    |            |           |              |      |         |
-|  1|    |            |           |              |      |         |
+|  TOTAALPRIJS |    |Zonder verzendingskosten  |           |              |      |  €49.2         |
+
