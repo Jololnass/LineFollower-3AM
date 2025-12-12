@@ -1,27 +1,28 @@
 # LineFollower
 
-Mijn linefollower zal werken!
+Mijn linefollower werkt!
 
-![A description of my image](images/empty.png)
+<img width="679" height="658" alt="image" src="https://github.com/user-attachments/assets/9b10ec0c-5dd9-4c7d-b504-7f5a045c7c0d" />
+
 
   
 ## specifications
 
-microcontroller:
+microcontroller: ATmega32U4
 
-motors: 
+motors: N20 micro metal gear motors 30:1
 
-h-bridge:
+h-bridge: DRV8833
 
-sensors:
+sensors: (HY-S301
 
-batteries:
+batteries: 2x 18650 
 
-wireless communication:
+wireless communication: HC-08
 
-distance sensor - motors:
+distance sensor - motors: 10mm
 
 weight:
 
-speed: 
+speed: 0.7m/s
 
